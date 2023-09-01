@@ -1,0 +1,19 @@
+FROM tiangolo/uwsgi-nginx:python3.8
+
+WORKDIR /app
+
+COPY nn/ nn/
+COPY requirements_t.txt requirements.txt
+COPY pytriton_server.py pytriton_server.py
+
+RUN pip install --upgrade pip  \
+    && apt-key adv --fetch-keys https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/3bf863cc.pub  \
+    && apt-key adv --fetch-keys https://developer.download.nvidia.com/compute/machine-learning/repos/ubuntu1804/x86_64/7fa2af80.pub  \
+    && apt-get update  \
+    && apt-get install -y python3-opencv  \
+    && pip install --no-cache-dir opencv-python  \
+    && pip install --no-cache-dir --upgrade -r requirements.txt
+
+ENV PYTHONUNBUFFERED 1
+
+CMD [ "python", "pytriton_server.py" ]

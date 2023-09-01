@@ -1,0 +1,17 @@
+version: "3.8"
+
+services:
+  fastapi:
+    build:
+      context: .
+      dockerfile: DockerfileFastAPI
+    ports:
+      - "8888:8080"
+  triton:
+    build:
+      context: .
+      dockerfile: DockerfileTriton
+    ports:
+      - "8000:8000"
+      - "8001:8001"
+      - "8002:8002"
