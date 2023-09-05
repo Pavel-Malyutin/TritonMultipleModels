@@ -13,5 +13,4 @@ RUN pip install --upgrade pip  \
     && pip install --no-cache-dir --upgrade -r requirements.txt
 
 ENV PYTHONUNBUFFERED 1
-
-CMD ["gunicorn", "--bind", ":8080", "fastapi_server:app", "--worker-class", "uvicorn.workers.UvicornH11Worker", "--timeout", "300", "--max-requests", "100", "--backlog", "2048", "--workers", "2", "--threads", "4", "--log-level", "debug"]
+CMD ["gunicorn", "--config", "gunicorn_config.py", "fastapi_server:app"]
