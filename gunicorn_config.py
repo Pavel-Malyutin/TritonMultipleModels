@@ -7,5 +7,5 @@ worker_connections = 1000
 timeout = 300
 max_requests = 1000
 backlog = 2048
-threads = 8
+threads = 1
 log_level = "debug"
